@@ -6,7 +6,7 @@ Task 1: Message Storage and Retrieval
 ---------
 Overview:
     - An array is a contiguous block of memory that stores elements at fixed indices.
-    - Accessing any element in an array can be done in constant time, i.e., O(1).
+    - Accessing any element in an array can be done in constant time, O(1).
 Pros:
     - Direct access (O(1)): You can access a message in an array directly by its index, which makes it very fast if you know the index.
     - Cache locality: Arrays have good cache performance because elements are stored consecutively in memory.
@@ -15,8 +15,8 @@ Cons:
     - Insertions and deletions: Inserting or deleting a message in the middle of an array requires shifting elements, which has a time complexity of O(n).
     - Fragmentation: With dynamic arrays, over-allocation for resizing can cause fragmentation, wasting space.
 Use cases:
-- If the number of messages is known in advance and rarely changes.
-- If fast access to messages by index is required, such as in systems where message indices or timestamps can be mapped directly to array indices.
+    - If the number of messages is known in advance and rarely changes.
+    - If fast access to messages by index is required, such as in systems where message indices or timestamps can be mapped directly to array indices.
 
 
 
@@ -63,11 +63,11 @@ Overview:
     - Trees are hierarchical structures, with each node containing a key and references to child nodes. A binary search tree (BST) is a tree where, for each node, the left child has a smaller key and the right child has a larger key. Other variants like AVL trees (self-balancing) and Red-Black trees improve search time by keeping the tree balanced.
 Pros:
     - Ordered messages: A BST or self-balancing tree inherently maintains an order of elements. This can be used for message ordering based on timestamps or priority.
-    - Efficient searches (O(log n)): With a balanced tree (like an AVL or Red-Black tree), searching for a message by its key or timestamp is O(log n).
+    - Efficient searches (O(log n)): With a balanced tree, searching for a message by its key or timestamp is O(log n).
     - Efficient range queries: If you need to retrieve a range of messages (e.g., messages within a time range), trees provide efficient solutions with O(log n + k) complexity, where k is the number of messages retrieved.
     - Efficient insertions and deletions (O(log n)): In a balanced tree, insertions and deletions maintain the logarithmic time complexity.
 Cons:
-    - Complexity: Trees (especially self-balancing ones) are more complex to implement and manage compared to simpler data structures like arrays or linked lists.
+    - Complexity: Trees are more complex to implement and manage compared to simpler data structures like arrays or linked lists.
     - Overhead: Each node in a tree typically stores additional pointers (e.g., left and right child pointers), increasing storage overhead compared to simple arrays or linked lists.
 Use cases:
     - When you need to maintain message order (e.g., by timestamp or priority).
@@ -87,7 +87,7 @@ Balanced Tree (e.g., AVL)	|O(log n)	    |O(log n)	            |O(log n)	    |Med
 
 Final Thoughts:
 ---------------
-    - Message Ordering: If ordering is critical (e.g., chronological message retrieval or priority-based systems), a balanced tree like an AVL or Red-Black Tree may be the best choice due to their natural ordering properties.
+    - Message Ordering: If ordering is critical (e.g., chronological message retrieval or priority-based systems), a balanced tree may be the best choice due to their natural ordering properties.
     - Search Complexity: If fast search is a priority and message ordering isn't necessary, hash tables are ideal, offering average O(1) search time. However, for ordered search, trees provide O(log n) performance.
     - Storage Efficiency: If minimizing storage overhead is critical, arrays are the most efficient (though fixed in size), followed by linked lists (dynamic but with pointer overhead), and hash tables (which can require resizing and extra space). Trees tend to be the most overhead-intensive but offer powerful capabilities like efficient range queries and ordered traversals.
 
@@ -143,7 +143,7 @@ Cons:
 3. Publish-Subscribe Systems (Message Brokers)
 ----------------------------------------------
 Overview: 
-    - A pub-sub model uses message brokers (like RabbitMQ, Kafka, or Redis Pub/Sub) to handle message delivery. Producers (publishers) send messages to topics or channels, while consumers (subscribers) receive them. This model decouples the senders and receivers, enabling real-time messaging across distributed systems.
+    - A pub-sub model uses message brokers to handle message delivery. Producers (publishers) send messages to topics or channels, while consumers (subscribers) receive them. This model decouples the senders and receivers, enabling real-time messaging across distributed systems.
 Use case for real-time systems: 
     - Pub-sub systems are ideal for scalable, high-throughput real-time communication. They work well when you need to push messages to multiple subscribers at once or implement event-driven architectures.
 Complexity:
@@ -162,17 +162,19 @@ Cons:
     
 4. Queues (FIFO)
 ----------------
-Overview: A queue is a simple data structure that follows a First-In-First-Out (FIFO) ordering. It is ideal for scenarios where messages need to be delivered in the order they were sent.
-Use case for real-time systems: Queues are used when message order is important, such as in processing a series of user commands or events.
+Overview: 
+    - A queue is a simple data structure that follows a First-In-First-Out (FIFO) ordering. It is ideal for scenarios where messages need to be delivered in the order they were sent.
+Use case for real-time systems: 
+    - Queues are used when message order is important, such as in processing a series of user commands or events.
 Complexity:
-Insert (enqueue): O(1)
-Remove (dequeue): O(1)
+    - Insert (enqueue): O(1)
+    - Remove (dequeue): O(1)
 Pros:
-Simple to implement and manage.
-Low-latency operations for message insertion and removal.
+    - Simple to implement and manage.
+    - Low-latency operations for message insertion and removal.
 Cons:
-Does not inherently support message prioritization (use a priority queue for that).
-Can become a bottleneck if too many messages are enqueued at once.
+    - Does not inherently support message prioritization (use a priority queue for that).
+    - Can become a bottleneck if too many messages are enqueued at once.
 
 
 
@@ -244,6 +246,7 @@ Conclusion:
     - For real-time systems that require instant message delivery with low latency, WebSockets are the best choice due to their full-duplex communication capabilities, low overhead, and scalability for a large number of users. While the setup is more complex, it is highly efficient for high-throughput systems.
     - Long Polling offers a good middle ground, providing real-time-like behavior without the need for WebSockets, though it still suffers from higher resource consumption and latency compared to WebSockets.
     - Polling is the simplest but least efficient method and should be used only when other techniques are not feasible or if updates are infrequent and latency is less critical.
+
 For scalable real-time systems (like messaging apps, notifications, etc.), WebSockets combined with appropriate data structures like publish-subscribe systems and priority queues would be the most efficient choice.
 
 
@@ -304,70 +307,80 @@ Use cases:
     
 3. Hash Tables
 --------------
-Overview: A hash table (or hash map) maps keys to values using a hash function. The key could be a unique identifier (e.g., conversation ID), and the value could be the metadata associated with the conversation.
-
+Overview: 
+    - A hash table (or hash map) maps keys to values using a hash function. The key could be a unique identifier (e.g., conversation ID), and the value could be the metadata associated with the conversation.
 Use cases for conversation management:
-
-Fast access by key: If you need to quickly retrieve conversation data by an identifier (e.g., conversation ID), hash tables are ideal.
-Efficient lookups: Hash tables provide O(1) average-time complexity for lookups, insertions, and deletions.
+    - Fast access by key: If you need to quickly retrieve conversation data by an identifier (e.g., conversation ID), hash tables are ideal.
+Efficient lookups: 
+    - Hash tables provide O(1) average-time complexity for lookups, insertions, and deletions.
 Pros:
-
-Fast lookups (O(1)): Retrieving conversation metadata by conversation ID is very fast.
-Efficient inserts and deletes (O(1)): Adding or removing conversations from the hash table is fast and does not require shifting elements.
+    - Fast lookups (O(1)): Retrieving conversation metadata by conversation ID is very fast.
+    - Efficient inserts and deletes (O(1)): Adding or removing conversations from the hash table is fast and does not require shifting elements.
 Cons:
-
-No ordering: Hash tables do not maintain any order of elements. If you need ordered access (e.g., sorted by last activity or unread messages), this could be a problem.
-Memory overhead: Hash tables require extra memory for storing the hash table itself, and the efficiency of the hash function is crucial for performance.
+    - No ordering: Hash tables do not maintain any order of elements. If you need ordered access (e.g., sorted by last activity or unread messages), this could be a problem.
+    - Memory overhead: Hash tables require extra memory for storing the hash table itself, and the efficiency of the hash function is crucial for performance.
 Use cases:
+    - If you need to quickly access a conversation by ID or unique identifier.
+    - When order of conversations doesn't matter, but quick lookups are essential.
 
-If you need to quickly access a conversation by ID or unique identifier.
-When order of conversations doesn't matter, but quick lookups are essential.
+    
+    
 4. Balanced Trees (Binary Search Trees, AVL Trees, Red-Black Trees)
-Overview: A balanced tree (such as an AVL tree or Red-Black tree) is a self-balancing binary search tree where the left child has a smaller key than the parent and the right child has a larger key. These trees maintain a balanced structure, ensuring that the height of the tree remains logarithmic.
-
+-------------------------------------------------------------------
+Overview: 
+    - A balanced tree (such as an AVL tree or Red-Black tree) is a self-balancing binary search tree where the left child has a smaller key than the parent and the right child has a larger key. These trees maintain a balanced structure, ensuring that the height of the tree remains logarithmic.
 Use cases for conversation management:
-
-Sorted access: Balanced trees allow for sorted access to conversations, such as sorting by last message time, unread message count, or priority.
-Efficient searching and range queries: Trees are ideal for quickly retrieving a range of conversations or finding conversations with specific attributes (e.g., unread messages > 0).
+    - Sorted access: Balanced trees allow for sorted access to conversations, such as sorting by last message time, unread message count, or priority.
+    - Efficient searching and range queries: Trees are ideal for quickly retrieving a range of conversations or finding conversations with specific attributes (e.g., unread messages > 0).
 Pros:
-
-Logarithmic access (O(log n)) for sorted data.
-Efficient range queries: Allows for efficient retrieval of all conversations within a given range (e.g., all conversations created after a certain time).
-Balanced structure: Ensures efficient operations even with large datasets.
+    - Logarithmic access (O(log n)) for sorted data.
+    - Efficient range queries: Allows for efficient retrieval of all conversations within a given range (e.g., all conversations created after a certain time).
+    - Balanced structure: Ensures efficient operations even with large datasets.
 Cons:
-
-Complexity: Trees are more complex to implement and manage compared to simpler data structures like arrays or hash tables.
-Memory overhead: Each node stores extra information (e.g., child pointers and balance factors), which increases memory usage compared to arrays or hash tables.
+    - Complexity: Trees are more complex to implement and manage compared to simpler data structures like arrays or hash tables.
+    - Memory overhead: Each node stores extra information (e.g., child pointers and balance factors), which increases memory usage compared to arrays or hash tables.
 Use cases:
+    - If you need sorted access to conversations (e.g., sorted by timestamp or unread messages).
+    - If you need to efficiently perform range queries or retrieve conversations based on certain criteria.
+    
+    
 
-If you need sorted access to conversations (e.g., sorted by timestamp or unread messages).
-If you need to efficiently perform range queries or retrieve conversations based on certain criteria.
 Strategies for Sorting, Filtering, and Indexing Conversations
-Once you've chosen the right data structure for storing the conversation metadata, here are some strategies for sorting, filtering, and indexing that will improve the user experience:
 
-Sorting Conversations
+1. Sorting Conversations
+    - Timestamp-based Sorting: Sort conversations by the timestamp of the last message to show the most recent conversations first. This is easy to implement with balanced trees or arrays (if the dataset is small).
+    - Unread Messages Sorting: Show conversations with unread messages at the top. This can be done by maintaining a count of unread messages in the metadata, sorted via a priority queue or balanced tree.
+    - Pinned Conversations: If certain conversations are pinned, you can place them at the top of the list by using a flag and sorting the rest of the conversations accordingly.
 
-Timestamp-based Sorting: Sort conversations by the timestamp of the last message to show the most recent conversations first. This is easy to implement with balanced trees or arrays (if the dataset is small).
-Unread Messages Sorting: Show conversations with unread messages at the top. This can be done by maintaining a count of unread messages in the metadata, sorted via a priority queue or balanced tree.
-Pinned Conversations: If certain conversations are pinned, you can place them at the top of the list by using a flag and sorting the rest of the conversations accordingly.
-Filtering Conversations
+2. Filtering Conversations
+    - By User: If users have multiple conversations with different people, you can filter conversations by user. This is easy to implement using a hash table with user IDs as keys.
+    - By Read/Unread Status: Filter conversations based on whether there are unread messages. This can be handled by maintaining an unread count in the conversation metadata, or by using a priority queue for efficient retrieval of unread conversations.
+    - By Keywords or Tags: If conversations are tagged or have keywords (e.g., project names, group chats), you can filter using indexing techniques like hash maps or trie data structures for fast text-based search.
 
-By User: If users have multiple conversations with different people, you can filter conversations by user. This is easy to implement using a hash table with user IDs as keys.
-By Read/Unread Status: Filter conversations based on whether there are unread messages. This can be handled by maintaining an unread count in the conversation metadata, or by using a priority queue for efficient retrieval of unread conversations.
-By Keywords or Tags: If conversations are tagged or have keywords (e.g., project names, group chats), you can filter using indexing techniques like hash maps or trie data structures for fast text-based search.
-Indexing Conversations
+3. Indexing Conversations
+    - Conversation ID Index: Maintain a direct index (using a hash table) to retrieve conversation metadata based on conversation IDs.
+    - Metadata Indexing: For frequently searched attributes (e.g., last message timestamp, unread count), you can build secondary indices using balanced trees or hash maps.
+    - Full-text Search Index: For keyword-based filtering (e.g., message contents or participant names), you might use an inverted index or trie to index the content of conversations and quickly search for relevant conversations.
 
-Conversation ID Index: Maintain a direct index (using a hash table) to retrieve conversation metadata based on conversation IDs.
-Metadata Indexing: For frequently searched attributes (e.g., last message timestamp, unread count), you can build secondary indices using balanced trees or hash maps.
-Full-text Search Index: For keyword-based filtering (e.g., message contents or participant names), you might use an inverted index or trie to index the content of conversations and quickly search for relevant conversations.
+    
 Summary
-Data Structure	Pros	Cons	Best Use Case
-Arrays	Fast indexed access, simple implementation	Resizing overhead, slow inserts/deletes	Fixed-size lists, index-based access
-Linked Lists	Efficient inserts/deletes, dynamic size	Slow access, higher memory overhead	Dynamic lists with frequent changes
-Hash Tables	Fast lookups, efficient inserts/deletes	No ordering, high memory overhead	Access by conversation ID, fast lookups
-Balanced Trees	Efficient sorted access, range queries	Complex implementation, memory overhead	Sorted access, range queries, filtering
+-------
+
+Data Structure	    |Pros	                        |Cons	                    |Best Use Case
+--------------      -----                           -----                       --------------
+Arrays	            |Fast indexed access,	        |Resizing overhead,	        |Fixed-size lists, 
+                    |simple implementation          |slow inserts/deletes       |index-based access
+
+Linked Lists	    |Efficient inserts/deletes, 	|Slow access, higher 	    |Dynamic lists with 
+                    |dynamic size                   |memory overhead            |frequent changes
+
+Hash Tables	        |Fast lookups, efficient 	    |No ordering, high 	        |Access by conversation 
+                    |inserts/deletes                |memory overhead            |ID, fast lookups
+
+Balanced Trees	    |Efficient sorted access,	    |Complex implementation, 	|Sorted access, range queries, 
+                    |range queries                  |memory overhead            |filtering
+
+                    
 In practice, a hybrid approach is often most effective. For example, you can use a hash table for quick lookups by conversation ID, a priority queue for managing unread messages and sorting, and a balanced tree or array for sorting conversations based on metadata like last activity.
-
-
 
 """
